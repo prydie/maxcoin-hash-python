@@ -1,8 +1,8 @@
 #include <Python.h>
 
-#include "quark.h"
+#include "maxcoin.h"
 
-static PyObject *quark_getpowhash(PyObject *self, PyObject *args)
+static PyObject *max_getpowhash(PyObject *self, PyObject *args)
 {
     char *output;
     PyObject *value;
@@ -17,9 +17,9 @@ static PyObject *quark_getpowhash(PyObject *self, PyObject *args)
     output = PyMem_Malloc(32);
 
 #if PY_MAJOR_VERSION >= 3
-    quark_hash((char *)PyBytes_AsString((PyObject*) input), output);
+    max_hash((char *)PyBytes_AsString((PyObject*) input), output);
 #else
-    quark_hash((char *)PyString_AsString((PyObject*) input), output);
+    max_hash((char *)PyString_AsString((PyObject*) input), output);
 #endif
     Py_DECREF(input);
 #if PY_MAJOR_VERSION >= 3
@@ -31,27 +31,27 @@ static PyObject *quark_getpowhash(PyObject *self, PyObject *args)
     return value;
 }
 
-static PyMethodDef QuarkMethods[] = {
-    { "getPoWHash", quark_getpowhash, METH_VARARGS, "Returns the proof of work hash using quark hash" },
+static PyMethodDef MaxMethods[] = {
+    { "getPoWHash", max_getpowhash, METH_VARARGS, "Returns the proof of work hash using max hash" },
     { NULL, NULL, 0, NULL }
 };
 
 #if PY_MAJOR_VERSION >= 3
-static struct PyModuleDef QuarkModule = {
+static struct PyModuleDef MaxModule = {
     PyModuleDef_HEAD_INIT,
-    "quark_hash",
+    "max_hash",
     "...",
     -1,
-    QuarkMethods
+    MaxMethods
 };
 
-PyMODINIT_FUNC PyInit_quark_hash(void) {
-    return PyModule_Create(&QuarkModule);
+PyMODINIT_FUNC PyInit_max_hash(void) {
+    return PyModule_Create(&MaxModule);
 }
 
 #else
 
-PyMODINIT_FUNC initquark_hash(void) {
-    (void) Py_InitModule("quark_hash", QuarkMethods);
+PyMODINIT_FUNC initmax_hash(void) {
+    (void) Py_InitModule("max_hash", MaxMethods);
 }
 #endif
