@@ -1,4 +1,4 @@
-quarkcoin-hash-python
+maxcoin-hash-python
 =====================
 
-Python module with quarkcoin's hashing algorithm used by some other tools
+Python module with maxcoins's hashing algorithm used by some other tools
