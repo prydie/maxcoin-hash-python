@@ -32,12 +32,14 @@
 #include <stdio.h>
 #include "maxcoin.h"
 
-void max_hash(const char* input, char* output)
+void max_hash(const char* input, char* output, const int* size)
 {
     sph_keccak256_context ctx_keccak;
     unsigned char pblank[1];
+
+/*    printf("input: %lu %lu\n", sizeof(input), size); */
     
     sph_keccak256_init(&ctx_keccak);
-    sph_keccak256 (&ctx_keccak, (strlen(input) == 0 ? pblank : (const void*)(input)), strlen(input) * sizeof(char));
+    sph_keccak256 (&ctx_keccak, (size == 0 ? pblank : (const void*)(input)), size);
     sph_keccak256_close(&ctx_keccak, output);
 }

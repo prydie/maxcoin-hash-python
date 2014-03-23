@@ -17,9 +17,9 @@ static PyObject *max_getpowhash(PyObject *self, PyObject *args)
     output = PyMem_Malloc(32);
 
 #if PY_MAJOR_VERSION >= 3
-    max_hash((char *)PyBytes_AsString((PyObject*) input), output);
+    max_hash((char *)PyBytes_AsString((PyObject*) input), output, (int *)PyBytes_Size((PyObject*) input));
 #else
-    max_hash((char *)PyString_AsString((PyObject*) input), output);
+    max_hash((char *)PyString_AsString((PyObject*) input), output, (int *)PyString_Size((PyObject*) input));
 #endif
     Py_DECREF(input);
 #if PY_MAJOR_VERSION >= 3

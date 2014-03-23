@@ -3,6 +3,6 @@
 
 #include "sha3/sph_keccak.h"
 
-void max_hash(const char* input, char* output);
+void max_hash(const char* input, char* output, const int* size);
 
 #endif
